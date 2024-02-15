@@ -1,0 +1,12 @@
+<Project>
+	<PropertyGroup>
+		<!-- <PackageId>EvDb</PackageId> -->
+		<Version>1.0.0</Version>
+		<Authors>Roma Bronstein</Authors>
+		<Company>EvDbDB.com</Company>
+		<TargetFramework>net8.0</TargetFramework>
+		<LangVersion>12.0</LangVersion>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+</Project>

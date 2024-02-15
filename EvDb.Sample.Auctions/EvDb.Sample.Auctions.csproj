@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+
+  <ItemGroup>
+	  <PackageReference Include="EvDb.Adapters.Store.EvDbSqlServer" Version="1.1.95" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EvDb.Sample.Auctions.Abstractions\EvDb.Sample.Auctions.Abstractions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="CommandsHandlers\CreateAuction\" />
+    <Folder Include="CommandsHandlers\AcceptBid\" />
+    <Folder Include="CommandsHandlers\PlaceBid\" />
+  </ItemGroup>
+
+</Project>

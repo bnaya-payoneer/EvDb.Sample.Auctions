@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="EvDb.Core" Version="1.1.95" />
+		<PackageReference Include="EvDb.SourceGenerator" Version="1.1.95" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="AsyncMessages\" />
+	</ItemGroup>
+
+</Project>
