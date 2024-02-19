@@ -3,11 +3,10 @@ using EvDb.Sample.Auctions.Abstractions.EventsPayload;
 
 namespace EvDb.Sample.Auctions.Abstractions;
 
-[EvDbEventAdder<AuctionCreated>]
-[EvDbEventAdder<BidPlaced>]
-[EvDbEventAdder<BidAccepted>]
-[EvDbEventAdder<BidRejected>]
-
+[EvDbEventAdder<AuctionCreatedEvent>]
+[EvDbEventAdder<BidPlacedEvent>]
+[EvDbEventAdder<BidAcceptedEvent>]
+[EvDbEventAdder<BidRejectedEvent>]
 public partial interface IAuctionAdder
 {
 }
