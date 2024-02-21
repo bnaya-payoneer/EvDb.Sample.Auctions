@@ -4,10 +4,9 @@ using System.Collections.Immutable;
 
 namespace EvDb.Sample.Auctions.Abstractions.Views.OpenAuctions;
 
-using State = ImmutableArray<OpenAuction>;
+using State = ImmutableArray<AuctionStatus.State>;
 
 [EvDbViewType<State, IOpenAuctionsAdder>("auction")]
-
 internal partial class View
 {
     protected override State DefaultState => State.Empty;
@@ -17,7 +16,7 @@ internal partial class View
         if(state.Any(x => x.AuctionId == payload.AuctionId))
             return state;
 
-        var item = new OpenAuction(payload.AuctionId, payload.ProductName);
+        var item = new AuctionStatus.State(payload.AuctionId, payload.ProductName, payload.StartingPrice);
         return state.Add(item);
     }
 

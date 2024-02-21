@@ -4,7 +4,7 @@ using System.Collections.Immutable;
 namespace EvDb.Sample.Auctions.Abstractions;
 
 
-[EvDbAttachView<Views.AuctionStatus.View>()]
+[EvDbAttachView<Views.AuctionStatus.View>("Status")]
 [EvDbStreamFactory<IAuctionAdder>]
 internal partial class AuctionStreamFactory
 {

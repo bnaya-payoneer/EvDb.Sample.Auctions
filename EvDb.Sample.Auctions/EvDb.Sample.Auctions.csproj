@@ -17,9 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CommandsHandlers\CreateAuction\" />
     <Folder Include="CommandsHandlers\AcceptBid\" />
-    <Folder Include="CommandsHandlers\PlaceBid\" />
   </ItemGroup>
 
 </Project>

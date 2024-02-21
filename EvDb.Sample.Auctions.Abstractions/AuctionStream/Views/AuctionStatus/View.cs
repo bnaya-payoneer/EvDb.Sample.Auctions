@@ -11,9 +11,7 @@ internal partial class View
 
     protected override State? Fold(State? state, AuctionCreatedEvent payload, IEvDbEventMeta meta)
     {
-        return new State(payload.AuctionId, payload.ProductName, payload.StartingPrice)
-        {
-        };
+        return new State(payload.AuctionId, payload.ProductName, payload.StartingPrice);
     }
 
     protected override State? Fold(State? state, BidPlacedEvent payload, IEvDbEventMeta meta)
