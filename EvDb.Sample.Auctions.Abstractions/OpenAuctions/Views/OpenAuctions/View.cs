@@ -20,7 +20,7 @@ internal partial class View
         return state.Add(item);
     }
 
-    protected override State Fold(State state, BidAcceptedEvent payload, IEvDbEventMeta meta)
+    protected override State Fold(State state, AuctionClosedEvent payload, IEvDbEventMeta meta)
     {
         var result = state.Where(x => x.AuctionId != payload.AuctionId)
                            .ToImmutableArray();

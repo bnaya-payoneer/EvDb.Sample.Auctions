@@ -5,7 +5,7 @@ namespace EvDb.Sample.Auctions.Abstractions;
 
 [EvDbEventAdder<AuctionCreatedEvent>]
 [EvDbEventAdder<BidPlacedEvent>]
-[EvDbEventAdder<BidAcceptedEvent>]
+[EvDbEventAdder<AuctionClosedEvent>]
 public partial interface IOpenAuctionsAdder
 {
 }

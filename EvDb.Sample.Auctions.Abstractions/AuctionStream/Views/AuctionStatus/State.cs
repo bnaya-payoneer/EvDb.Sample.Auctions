@@ -7,5 +7,5 @@ public readonly partial record struct State(int AuctionId,
     public int? CurrentBid { get; init; }
     public int? BidderId { get; init; }
     public DateTimeOffset? PlacedAt { get; init; }
-    public DateTimeOffset? AcceptedAt { get; init; }
+    public DateTimeOffset? ClosedAt { get; init; }
 }

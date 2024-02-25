@@ -41,7 +41,7 @@ internal partial class View
         };
     }
 
-    protected override State? Fold(State? state, BidAcceptedEvent payload, IEvDbEventMeta meta)
+    protected override State? Fold(State? state, AuctionClosedEvent payload, IEvDbEventMeta meta)
     {
         #region Exception Handling
 
@@ -59,7 +59,7 @@ internal partial class View
 
         return state.Value with
         {
-            AcceptedAt = DateTimeOffset.UtcNow
+            ClosedAt = DateTimeOffset.UtcNow
         };
     }
 }

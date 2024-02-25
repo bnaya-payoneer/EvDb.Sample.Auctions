@@ -16,8 +16,4 @@
     <ProjectReference Include="..\EvDb.Sample.Auctions.Abstractions\EvDb.Sample.Auctions.Abstractions.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="CommandsHandlers\AcceptBid\" />
-  </ItemGroup>
-
 </Project>
