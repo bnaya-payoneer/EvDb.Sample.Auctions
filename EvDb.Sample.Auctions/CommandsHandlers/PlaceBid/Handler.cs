@@ -3,6 +3,7 @@ using EvDb.Core;
 using EvDb.Sample.Auctions.Abstractions;
 using EvDb.Sample.Auctions.Abstractions.EventsPayload;
 using EvDb.Sample.Auctions.Abstractions.Views.AuctionStatus;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Threading.Channels;
 
 namespace EvDb.Sample.Auctions.CommandsHandlers.PlaceBid;
@@ -25,6 +26,8 @@ public class Handler : IHandler
     {
         int id = command.AuctionId;
         var stream = await _factory.GetAsync(id.ToString(), cancellationToken);
+        if(stream.Views.Status == null) 
+            throw new KeyNotFoundException(command.AuctionId.ToString());
         if(command.Bid <= stream.Views.Status!.Value.CurrentBid) 
         {
             var rejected = new BidRejectedEvent(id, command.UserId, command.Bid);

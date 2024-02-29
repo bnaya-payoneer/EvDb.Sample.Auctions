@@ -6,7 +6,7 @@ namespace EvDb.Sample.Auctions.Abstractions;
 
 [EvDbAttachView<Views.AuctionStatus.View>("Status")]
 [EvDbStreamFactory<IAuctionAdder>]
-internal partial class AuctionStreamFactory
+public partial class AuctionStreamFactory
 {
     #region Ctor
 

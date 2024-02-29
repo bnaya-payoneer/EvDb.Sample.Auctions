@@ -1,6 +1,11 @@
 using EvDb.Sample.Auctions;
-using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Channels;
+using Projectors = EvDb.Sample.Auctions.Projectors;
+using CreateAuction = EvDb.Sample.Auctions.CommandsHandlers.CreateAuction;
+using PlaceBid = EvDb.Sample.Auctions.CommandsHandlers.PlaceBid;
+using CloseAuction = EvDb.Sample.Auctions.CommandsHandlers.CloseAuction;
+using EvDb.Sample.Auctions.Abstractions;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,10 +14,34 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(config =>
+{
+    config.CustomSchemaIds(x => x.FullName);
+});
+
+builder.Services.AddEvDbSqlServerStore();
 builder.Services.AddKeyedSingleton(
-    Constants.OpenAuctionsChannelKey, 
+    Constants.OpenAuctionsChannelKey,
     Channel.CreateUnbounded<PublishedEvent>());
+builder.Services.AddHostedService<Projectors.OpenAuctions.HostedService>();
+builder.Services.AddSingleton<CreateAuction.IHandler, CreateAuction.Handler>();
+builder.Services.AddSingleton<PlaceBid.IHandler, PlaceBid.Handler>();
+builder.Services.AddSingleton<CloseAuction.IHandler, CloseAuction.Handler>();
+builder.Services.AddSingleton<IEvDbOpenAuctionsStreamFactory, OpenAuctionsStreamFactory>();
+builder.Services.AddSingleton<IEvDbAuctionStreamFactory, AuctionStreamFactory>();
+builder.Services.AddKeyedSingleton(
+    Constants.OpenAuctionsProjectionKey,
+    async (sp, key) =>
+    {
+        var factory = sp.GetRequiredService<IEvDbOpenAuctionsStreamFactory>();
+        IEvDbOpenAuctionsStream stream = await factory.GetAsync(key?.ToString() ?? throw new KeyNotFoundException());
+        return stream;
+    });
+builder.Services.AddSingleton<Projectors.OpenAuctions.Handler>();
+builder.Services.AddSingleton<Projectors.OpenAuctions.IView>(sp =>
+sp.GetRequiredService<Projectors.OpenAuctions.Handler>());
+builder.Services.AddSingleton<Projectors.OpenAuctions.IListener>(sp =>
+sp.GetRequiredService<Projectors.OpenAuctions.Handler>());
 
 var app = builder.Build();
 

@@ -4,8 +4,8 @@
   </PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="EvDb.Core" Version="1.1.100" />
-		<PackageReference Include="EvDb.SourceGenerator" Version="1.1.100" />
+		<PackageReference Include="EvDb.Core" Version="1.1.101" />
+		<PackageReference Include="EvDb.SourceGenerator" Version="1.1.101" />
 	</ItemGroup>
 
 	<ItemGroup>

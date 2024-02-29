@@ -4,9 +4,9 @@ using System.Collections.Immutable;
 namespace EvDb.Sample.Auctions.Abstractions;
 
 
-[EvDbAttachView<Views.OpenAuctions.View>()]
+[EvDbAttachView<Views.OpenAuctions.View>("Status")]
 [EvDbStreamFactory<IAuctionAdder>]
-internal partial class OpenAuctionsStreamFactory
+public partial class OpenAuctionsStreamFactory
 {
     #region Ctor
 
