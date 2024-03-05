@@ -25,7 +25,12 @@ internal partial class View
         var item = state.FirstOrDefault(m => m.AuctionId == payload.AuctionId);
         if (item == default)
             throw new InvalidOperationException($"Auction Id [{payload.AuctionId}] is missing");
-        if (!item.CurrentBid.HasValue || payload.Bid > item.CurrentBid)
+
+        bool isHigher = item.CurrentBid.HasValue
+                            ? payload.Bid > item.CurrentBid
+                            : payload.Bid > item.StartingPrice;
+
+        if (isHigher)
         {
             state = state.Remove(item)
                         .Insert(0, item with

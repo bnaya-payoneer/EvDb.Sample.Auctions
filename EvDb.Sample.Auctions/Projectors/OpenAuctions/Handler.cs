@@ -20,6 +20,7 @@ public class Handler : IView, IListener
     {
         _streamTask = streamTask;
     }
+    
 
     public async Task ListenAsync(Channel<PublishedEvent> channel, CancellationToken cancellationToken)
     {

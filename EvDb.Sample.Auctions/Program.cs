@@ -1,11 +1,13 @@
 using EvDb.Sample.Auctions;
 using System.Threading.Channels;
 using Projectors = EvDb.Sample.Auctions.Projectors;
+using Processors = EvDb.Sample.Auctions.Processors;
 using CreateAuction = EvDb.Sample.Auctions.CommandsHandlers.CreateAuction;
 using PlaceBid = EvDb.Sample.Auctions.CommandsHandlers.PlaceBid;
 using CloseAuction = EvDb.Sample.Auctions.CommandsHandlers.CloseAuction;
 using EvDb.Sample.Auctions.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
+using System.Collections.Concurrent;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,7 +25,6 @@ builder.Services.AddEvDbSqlServerStore();
 builder.Services.AddKeyedSingleton(
     Constants.OpenAuctionsChannelKey,
     Channel.CreateUnbounded<PublishedEvent>());
-builder.Services.AddHostedService<Projectors.OpenAuctions.HostedService>();
 builder.Services.AddSingleton<CreateAuction.IHandler, CreateAuction.Handler>();
 builder.Services.AddSingleton<PlaceBid.IHandler, PlaceBid.Handler>();
 builder.Services.AddSingleton<CloseAuction.IHandler, CloseAuction.Handler>();
@@ -42,6 +43,8 @@ builder.Services.AddSingleton<Projectors.OpenAuctions.IView>(sp =>
 sp.GetRequiredService<Projectors.OpenAuctions.Handler>());
 builder.Services.AddSingleton<Projectors.OpenAuctions.IListener>(sp =>
 sp.GetRequiredService<Projectors.OpenAuctions.Handler>());
+builder.Services.AddHostedService<Projectors.OpenAuctions.HostedService>();
+builder.Services.AddHostedService<Processors.AuctionCloser.HostedService>();
 
 var app = builder.Build();
 

@@ -22,7 +22,7 @@ public class Handler : IHandler
         _channel = channel;
     }
 
-    public async Task HandleAsync(Command command, CancellationToken cancellationToken = default)
+    public async Task<BidResult> HandleAsync(Command command, CancellationToken cancellationToken = default)
     {
         int id = command.AuctionId;
         var stream = await _factory.GetAsync(id.ToString(), cancellationToken);
@@ -32,12 +32,13 @@ public class Handler : IHandler
         {
             var rejected = new BidRejectedEvent(id, command.UserId, command.Bid);
             stream.Add(rejected);
-            return;
+            return BidResult.Rejected;
         }
         var payload = new BidPlacedEvent(id, command.UserId, command.Bid);
         IEvDbEventMeta meta = stream.Add(payload);
         await stream.SaveAsync(cancellationToken);
         var message = new PublishedEvent(payload, meta);
         await _channel.Writer.WriteAsync(message);
+        return BidResult.Accepted;
     }
 }
