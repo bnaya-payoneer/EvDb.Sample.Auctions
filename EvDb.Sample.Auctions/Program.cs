@@ -8,12 +8,19 @@ using CloseAuction = EvDb.Sample.Auctions.CommandsHandlers.CloseAuction;
 using EvDb.Sample.Auctions.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Concurrent;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+                 .AddJsonOptions(o =>
+                 {
+                     var opt = o.JsonSerializerOptions;
+                     opt.Converters.Add(new JsonStringEnumConverter());
+                     opt.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+                 });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(config =>
