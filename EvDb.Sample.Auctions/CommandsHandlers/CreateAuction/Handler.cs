@@ -4,6 +4,7 @@ using EvDb.Sample.Auctions.Abstractions;
 using EvDb.Sample.Auctions.Abstractions.EventsPayload;
 using EvDb.Sample.Auctions.Abstractions.Views.AuctionStatus;
 using System.Threading.Channels;
+using EvDb.Sample.Auctions.Abstractions.Commands;
 
 namespace EvDb.Sample.Auctions.CommandsHandlers.CreateAuction;
 
@@ -20,7 +21,7 @@ public class Handler : IHandler
         _channel = channel;
     }
 
-    public async Task<State> HandleAsync(Command command, CancellationToken cancellationToken = default)
+    public async Task<State> HandleAsync(CreateAuctionCommand command, CancellationToken cancellationToken = default)
     {
         int id = command.AuctionId;
         var stream = await _factory.GetAsync(id.ToString(), cancellationToken);
