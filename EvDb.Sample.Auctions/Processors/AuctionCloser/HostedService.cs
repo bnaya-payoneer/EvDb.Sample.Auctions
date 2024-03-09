@@ -3,6 +3,7 @@ using EvDb.Sample.Auctions.Abstractions.Views.AuctionStatus;
 using EvDb.Sample.Auctions.CommandsHandlers.CloseAuction;
 using System.Collections.Immutable;
 using System.Threading.Channels;
+using EvDb.Sample.Auctions.Abstractions.Commands;
 
 namespace EvDb.Sample.Auctions.Processors.AuctionCloser;
 
@@ -42,7 +43,7 @@ internal class HostedService : BackgroundService
 
                 if (now - auction.PlacedAt < TimeSpan.FromSeconds(10))
                     return;
-                var command = new Command(auction.AuctionId, auction.BidderId.Value, auction.CurrentBid.Value, auction.PlacedAt.Value, now);
+                var command = new CloseAuctionCommand(auction.AuctionId, auction.BidderId.Value, auction.CurrentBid.Value, auction.PlacedAt.Value, now);
                 await _handler.HandleAsync(command);
             }
         }

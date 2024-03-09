@@ -9,7 +9,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="AuctionStream\AsyncMessages\" />
+	  <Folder Include="Streams\" />
 	</ItemGroup>
 
 </Project>

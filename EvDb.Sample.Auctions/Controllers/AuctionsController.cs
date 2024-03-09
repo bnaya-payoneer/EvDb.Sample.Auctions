@@ -2,6 +2,7 @@ using EvDb.Sample.Auctions.Abstractions.Views.AuctionStatus;
 using EvDb.Sample.Auctions.CommandsHandlers.PlaceBid;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Immutable;
+using EvDb.Sample.Auctions.Abstractions.Commands;
 using CreateAuction = EvDb.Sample.Auctions.CommandsHandlers.CreateAuction;
 using PlaceBid = EvDb.Sample.Auctions.CommandsHandlers.PlaceBid;
 
@@ -32,7 +33,7 @@ public class AuctionsController : ControllerBase
 
     [HttpPost("create-auction")]
     [ProducesResponseType<State>(200)]
-    public async Task<IActionResult> CreateAuctionAsync(CreateAuction.Command command)
+    public async Task<IActionResult> CreateAuctionAsync(CreateAuctionCommand command)
     {
         var state = await _createAuctionHandler.HandleAsync(command);
         return Ok(state);
@@ -41,7 +42,7 @@ public class AuctionsController : ControllerBase
     [HttpPost("place-bid")]
     [ProducesResponseType<BidResult>(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> PlaceBidAsync(PlaceBid.Command command)
+    public async Task<IActionResult> PlaceBidAsync(PlaceBidCommand command)
     {
         try
         {
