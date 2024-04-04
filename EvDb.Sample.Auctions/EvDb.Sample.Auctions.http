@@ -1,5 +1,11 @@
 @EvDb.Sample.Auctions_HostAddress = http://localhost:5176
 
+// get all auctions
+GET {{EvDb.Sample.Auctions_HostAddress}}/Auctions/open-auctions
+Accept: application/json
+ 
+###
+
 // create a new auction
 POST {{EvDb.Sample.Auctions_HostAddress}}/Auctions/create-auction
 Accept: application/json
@@ -11,6 +17,8 @@ Content-Type: application/json
   "startingPrice": 400
 }
 
+###
+
 // create a new auction
 POST {{EvDb.Sample.Auctions_HostAddress}}/Auctions/create-auction
 Accept: application/json
@@ -21,6 +29,12 @@ Content-Type: application/json
   "productName": "Tent",
   "startingPrice": 500
 }
+
+###
+
+// get all auctions
+GET {{EvDb.Sample.Auctions_HostAddress}}/Auctions/open-auctions
+Accept: application/json
 
 ###
 
@@ -37,6 +51,12 @@ Content-Type: application/json
 
 ###
 
+// get all auctions
+GET {{EvDb.Sample.Auctions_HostAddress}}/Auctions/open-auctions
+Accept: application/json
+
+###
+
 // place a bid (accepted)
 POST {{EvDb.Sample.Auctions_HostAddress}}/Auctions/place-bid
 Accept: application/json
@@ -50,6 +70,12 @@ Content-Type: application/json
 
 ###
 
+// get all auctions
+GET {{EvDb.Sample.Auctions_HostAddress}}/Auctions/open-auctions
+Accept: application/json
+
+###
+
 // place a bid (accepted)
 POST {{EvDb.Sample.Auctions_HostAddress}}/Auctions/place-bid
 Accept: application/json
@@ -57,8 +83,27 @@ Content-Type: application/json
 
 {
   "auctionId": 67,
-  "userId": 6,
+  "userId": 9,
   "bid": 950
+}
+
+###
+
+// get all auctions
+GET {{EvDb.Sample.Auctions_HostAddress}}/Auctions/open-auctions
+Accept: application/json
+
+###
+
+// place a bid (accepted)
+POST {{EvDb.Sample.Auctions_HostAddress}}/Auctions/place-bid
+Accept: application/json
+Content-Type: application/json
+
+{
+  "auctionId": 31,
+  "userId": 7,
+  "bid": 450
 }
 
 ###
