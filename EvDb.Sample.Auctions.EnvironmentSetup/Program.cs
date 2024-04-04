@@ -21,6 +21,6 @@ IEvDbStorageMigration migration = serviceProvider
     .GetRequiredService<IEvDbStorageMigration>();
 
 if (Array.Exists(args, m => m == "--destroy"))
-    await migration.DestroyTestEnvironmentAsync();
+    await migration.CreateEnvironmentAsync();
 else
-    await migration.CreateTestEnvironmentAsync();
+    await migration.DestroyEnvironmentAsync();

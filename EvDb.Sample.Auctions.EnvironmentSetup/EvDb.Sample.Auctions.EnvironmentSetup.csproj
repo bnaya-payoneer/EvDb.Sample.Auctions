@@ -15,7 +15,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="EvDb.Adapters.Store.EvDbSqlServerMigration" Version="1.1.101" />
+		<PackageReference Include="EvDb.Adapters.Store.EvDbSqlServerMigration" Version="1.1.107" />
 	</ItemGroup>
 
 	<ItemGroup>

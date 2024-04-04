@@ -24,12 +24,11 @@ public class Handler : IHandler
     public async Task<State> HandleAsync(CreateAuctionCommand command, CancellationToken cancellationToken = default)
     {
         int id = command.AuctionId;
-        var stream = await _factory.GetAsync(id.ToString(), cancellationToken);
+        IEvDbAuctionStream stream = await _factory.GetAsync(id.ToString(), cancellationToken);
         var payload = new AuctionCreatedEvent(id, command.ProductName, command.StartingPrice);
         IEvDbEventMeta meta = stream.Add(payload);
         await stream.SaveAsync(cancellationToken);
         State response = stream.Views.Status!.Value;
-
         var message = new PublishedEvent(payload, meta);
         await _channel.Writer.WriteAsync(message);
 

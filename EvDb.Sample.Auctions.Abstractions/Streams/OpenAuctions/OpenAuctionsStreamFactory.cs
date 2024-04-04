@@ -8,14 +8,6 @@ namespace EvDb.Sample.Auctions.Abstractions;
 [EvDbStreamFactory<IAuctionAdder>]
 public partial class OpenAuctionsStreamFactory
 {
-    #region Ctor
-
-    public OpenAuctionsStreamFactory(IEvDbStorageAdapter storageAdapter) : base(storageAdapter)
-    {
-    }
-
-    #endregion // Ctor
-
     #region Partition
 
     public override EvDbPartitionAddress PartitionAddress { get; } =

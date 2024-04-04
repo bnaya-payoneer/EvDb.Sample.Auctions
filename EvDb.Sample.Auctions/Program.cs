@@ -6,7 +6,6 @@ using CreateAuction = EvDb.Sample.Auctions.CommandsHandlers.CreateAuction;
 using PlaceBid = EvDb.Sample.Auctions.CommandsHandlers.PlaceBid;
 using CloseAuction = EvDb.Sample.Auctions.CommandsHandlers.CloseAuction;
 using EvDb.Sample.Auctions.Abstractions;
-using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Concurrent;
 using System.Text.Json.Serialization;
 
@@ -35,8 +34,8 @@ builder.Services.AddKeyedSingleton(
 builder.Services.AddSingleton<CreateAuction.IHandler, CreateAuction.Handler>();
 builder.Services.AddSingleton<PlaceBid.IHandler, PlaceBid.Handler>();
 builder.Services.AddSingleton<CloseAuction.IHandler, CloseAuction.Handler>();
-builder.Services.AddSingleton<IEvDbOpenAuctionsStreamFactory, OpenAuctionsStreamFactory>();
-builder.Services.AddSingleton<IEvDbAuctionStreamFactory, AuctionStreamFactory>();
+builder.Services.AddEvDbAuctionStreamFactory();
+builder.Services.AddEvDbOpenAuctionsStreamFactory();
 builder.Services.AddKeyedSingleton(
     Constants.OpenAuctionsProjectionKey,
     async (sp, key) =>

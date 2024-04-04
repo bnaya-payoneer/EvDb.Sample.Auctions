@@ -2,7 +2,7 @@
 
 namespace EvDb.Sample.Auctions.Abstractions.EventsPayload;
 
-[EvDbEventPayload("bid-accepted")]
+[EvDbEventPayload("auction-close")]
 public readonly partial record struct AuctionClosedEvent(int AuctionId,
                                                         int BidderId, 
                                                         int Bid,
