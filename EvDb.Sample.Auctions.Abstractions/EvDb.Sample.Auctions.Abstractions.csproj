@@ -4,8 +4,13 @@
   </PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="dotnet-framework-sonarscanner" Version="7.1.1" />
 		<PackageReference Include="EvDb.Core" Version="1.1.107" />
 		<PackageReference Include="EvDb.SourceGenerator" Version="1.1.107" />
+		<PackageReference Include="SonarAnalyzer.CSharp" Version="10.3.0.106239">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 	</ItemGroup>
 
 	<ItemGroup>
